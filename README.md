@@ -1,7 +1,11 @@
 # [Telegram-Bot](https://my.telegram.org/apps)
+
 - [Read Message in json format](https://my.telegram.org/)
 - Get data for [@imvickykumarbot](https://api.telegram.org/bot1987325386:AAHeUN-nSUOV7uDDMWrh0nLoyjHh598I_F4/getUpdates)
+
 ----------------------------------
+
+[![ss](https://github.com/imvickykumar999/Telegram-Bot/blob/main/Screenshot_20210823-215858_Telegram.jpg)](https://t.me/imvickykumarbot)
 
 ## [Where to find the Telegram Api Key ?](https://stackoverflow.com/questions/43291868/where-to-find-the-telegram-api-key)
 
