@@ -1,6 +1,6 @@
-# [Telegram-Bot](https://my.telegram.org/apps)
+# [Telegram-Bot](https://imvickykumar999.github.io/Telegram-Bot/)
 
-- [Read Message in json format](https://my.telegram.org/)
+- [Read Message in json format](https://my.telegram.org/apps)
 - Get data for [@imvickykumarbot](https://api.telegram.org/bot1987325386:AAHeUN-nSUOV7uDDMWrh0nLoyjHh598I_F4/getUpdates)
 
 ----------------------------------
