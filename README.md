@@ -5,7 +5,7 @@
 
 ----------------------------------
 
-[![ss](https://github.com/imvickykumar999/Telegram-Bot/blob/main/Screenshot_20210823-215858_Telegram.jpg)](https://t.me/imvickykumarbot)
+[![ss](https://github.com/imvickykumar999/Telegram-Bot/blob/main/Screenshot_20210823-215858_Telegram.jpg?raw=true)](https://t.me/imvickykumarbot)
 
 ## [Where to find the Telegram Api Key ?](https://stackoverflow.com/questions/43291868/where-to-find-the-telegram-api-key)
 
