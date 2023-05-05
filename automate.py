@@ -8,7 +8,7 @@ req = requests.get(gets)
 
 show = req.json()
 lst = list(show.values())[1]
-fetch = lst[-1]['message']['text']
+# fetch = lst[-1]['message']['text']
 
 bot_message = 'Welcome, this message is sent automatically.'
 bot_chatID = lst[-1]['message']['chat']['id']
