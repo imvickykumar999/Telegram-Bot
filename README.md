@@ -1,17 +1,17 @@
 ># [`Telegram-Bot`](https://imvickykumar999.github.io/Telegram-Bot/)
 
-    Read message : 
-    (chat_id is in response of this request, it contains all 
-    messages sent by anyone till now, on this bot)
+        Read message : 
+        (chat_id is in response of this request, it contains all 
+        messages sent by anyone till now, on this bot)
 
-        https://api.telegram.org/bot{bot_token}/getUpdates
+            https://api.telegram.org/bot{bot_token}/getUpdates
 
-    Write Message : 
-    (bot_chatID will define, whom to send message, 
-    and bot_token will define who will send message)
+        Write Message : 
+        (bot_chatID will define, whom to send message, 
+        and bot_token will define who will send message)
 
-        https://api.telegram.org/bot{bot_token}/sendMessage?
-        chat_id={bot_chatID}&parse_mode=Markdown&text={bot_message}
+            https://api.telegram.org/bot{bot_token}/sendMessage?
+            chat_id={bot_chatID}&parse_mode=Markdown&text={bot_message}
 
 >---------------
 >
