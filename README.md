@@ -1,10 +1,26 @@
-# [Telegram-Bot](https://imvickykumar999.github.io/Telegram-Bot/)
+># [`Telegram-Bot`](https://imvickykumar999.github.io/Telegram-Bot/)
 
-- [Read Message in json format](https://my.telegram.org/apps)
-- Get data for [@imvickykumarbot](https://api.telegram.org/bot1987325386:AAHeUN-nSUOV7uDDMWrh0nLoyjHh598I_F4/getUpdates)
+    Read message : 
+    (chat_id is in response of this request, it contains all messages sent by anyone till now, on this bot)
 
-----------------------------------
+        https://api.telegram.org/bot{bot_token}/getUpdates
 
-## [Where to find the Telegram Api Key ?](https://stackoverflow.com/questions/43291868/where-to-find-the-telegram-api-key)
+    Write Message : 
+    (bot_chatID will define, whom to send message, and bot_token will define who will send message)
 
-[![image](https://user-images.githubusercontent.com/50515418/130468473-8ddfc5a6-0e14-45d7-b436-b32e7e6b5158.png)](https://t.me/imvickykumar999bot)
+        https://api.telegram.org/bot{bot_token}/sendMessage?chat_id={bot_chatID}&parse_mode=Markdown&text={bot_message}
+
+>---------------
+>
+>## [`Daily Task Scheduler`](https://www.pythonanywhere.com/user/imvickykumar999/tasks_tab/)
+>
+>![image](https://user-images.githubusercontent.com/50515418/236386341-7501297c-a659-4cb3-b964-e0fe3aeece4f.png)
+>
+>------------
+>
+>## `Where to find the Telegram` [`Api Key`](https://stackoverflow.com/questions/43291868/where-to-find-the-telegram-api-key) ?
+>
+>### `Go to :` [`@BotFather`](https://t.me/BotFather)
+>
+>![image](https://user-images.githubusercontent.com/50515418/236387792-b1be0376-b938-4ab5-9f82-c8e3526d808c.png)
+>
