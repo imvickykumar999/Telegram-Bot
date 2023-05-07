@@ -8,11 +8,15 @@ req = requests.get(gets)
 
 show = req.json()
 lst = list(show.values())[1]
-# fetch = lst[-1]['message']['text']
 
-bot_message = 'Welcome, this message is sent automatically.'
-bot_chatID = lst[-1]['message']['chat']['id']
+bot_message = '''
+Good morning, 
+Here is today's news.
 
-sets = f'https://api.telegram.org/bot{bot_token}/sendMessage?chat_id={bot_chatID}&parse_mode=Markdown&text={bot_message}'    
-x = requests.post(sets)
-print(x.text)
+https://inshorts.com/en/read
+'''
+
+for i in lst:
+  bot_chatID = i['message']['chat']['id']
+  sets = f'https://api.telegram.org/bot{bot_token}/sendMessage?chat_id={bot_chatID}&parse_mode=Markdown&text={bot_message}'    
+  requests.post(sets)
