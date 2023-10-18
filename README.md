@@ -10,8 +10,7 @@
         (bot_chatID will define, whom to send message, 
         and bot_token will define who will send message)
 
-            https://api.telegram.org/bot{bot_token}/sendMessage?
-            chat_id={bot_chatID}&parse_mode=Markdown&text={bot_message}
+            https://api.telegram.org/bot{bot_token}/sendMessage?chat_id={bot_chatID}&parse_mode=Markdown&text={bot_message}
 
 >---------------
 >
