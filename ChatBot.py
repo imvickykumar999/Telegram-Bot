@@ -1,70 +1,63 @@
+import os
 import requests
-import time
+from flask import Flask, request, jsonify
 
-# Replace with your bot token (Do not share publicly)
-BOT_TOKEN = "xxxxx:xxxxxxxxxxxxxxxxxxxxxxxx"
+app = Flask(__name__)
 
-# Function to get latest messages
-def get_updates(offset=None):
-    url = f"https://api.telegram.org/bot{BOT_TOKEN}/getUpdates"
-    params = {"offset": offset, "timeout": 30}  # Long polling
-    response = requests.get(url, params=params)
+# Bot token (Use an environment variable for security)
+BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+
+if not BOT_TOKEN:
+    raise ValueError("Bot token not found! Set the TELEGRAM_BOT_TOKEN environment variable.")
+
+BASE_URL = f"https://api.telegram.org/bot{BOT_TOKEN}"
+
+# Webhook URL (Replace with your actual HTTPS URL)
+WEBHOOK_URL = "https://telegramchatbot.pythonanywhere.com/webhook"
+
+# Function to set webhook
+def set_webhook():
+    url = f"{BASE_URL}/setWebhook"
+    response = requests.post(url, json={"url": WEBHOOK_URL})
     return response.json()
 
 # Function to send a message
 def send_message(chat_id, text):
-    url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+    url = f"{BASE_URL}/sendMessage"
     payload = {"chat_id": chat_id, "text": text}
-    response = requests.post(url, json=payload)
-    return response.json()
+    requests.post(url, json=payload)
 
-# Function to generate a response based on received message
+# Function to generate a reply
 def generate_reply(message_text):
-    replies = {
-        "hi": "How can I help you?",
-        "hello": "Hey there! How can I assist you?",
-        "help": "Sure! Please tell me what you need help with.",
+    responses = {
+        "hi": "How can I assist you today?",
+        "hello": "Hello! How can I help you?",
+        "help": "I'm here to assist you. What do you need?",
+        "bye": "Goodbye! Have a great day! 😊",
+        "thanks": "You're welcome! Let me know if you need more help. 🙌",
     }
-    return replies.get(message_text.lower(), "Sorry, I didn't understand. Can you rephrase?")
+    return responses.get(message_text.lower(), "I'm not sure I understand. Can you rephrase?")
 
-# Main loop to listen for new messages
-def run_bot():
-    last_update_id = None
+# Webhook endpoint to receive messages
+@app.route("/webhook", methods=["POST"])
+def webhook():
+    update = request.get_json()
 
-    print("Bot is running... Listening for messages!")
+    if "message" in update:
+        chat_id = update["message"]["chat"]["id"]
+        message_text = update["message"].get("text", "")
 
-    while True:
-        updates = get_updates(last_update_id)
+        # Generate and send response
+        reply_text = generate_reply(message_text)
+        send_message(chat_id, reply_text)
 
-        if updates.get("result"):
-            for item in updates["result"]:
-                try:
-                    update_id = item["update_id"]
-                    message_text = item["message"]["text"]
-                    chat_id = item["message"]["from"]["id"]
-                    user_name = item["message"]["from"].get("username", "Unknown")
+    return jsonify({"status": "ok"}), 200
 
-                    # Generate an appropriate reply
-                    reply_text = generate_reply(message_text)
+# Route to manually set webhook (for testing)
+@app.route("/set_webhook", methods=["GET"])
+def set_webhook_route():
+    result = set_webhook()
+    return jsonify(result)
 
-                    # Send reply
-                    send_message(chat_id, reply_text)
-
-                    # Print conversation to the command line
-                    print("\n📩 New Message Received!")
-                    print(f"👤 User ({user_name}, ID: {chat_id}): {message_text}")
-                    print(f"🤖 Bot Reply: {reply_text}")
-
-                    # Update last processed message
-                    last_update_id = update_id + 1
-                
-                except KeyError:
-                    # Skip non-text messages (like stickers, images, etc.)
-                    continue
-
-        time.sleep(2)  # Delay to prevent API spam
-
-# Run the bot
 if __name__ == "__main__":
-    run_bot()
-
+    app.run(host="0.0.0.0", port=8080)
