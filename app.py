@@ -33,6 +33,7 @@ def generate_reply_from_ollama(message_text):
     try:
         # Run Ollama as a subprocess
         process = subprocess.Popen(
+            # ["ollama", "run", "blogforge"],
             ["ollama", "run", "llama3.2:1b"],
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
