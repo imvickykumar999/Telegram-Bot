@@ -6,7 +6,7 @@ import threading
 
 app = Flask(__name__)
 
-# export TELEGRAM_BOT_TOKEN="6165xxxx:xxxxxxxxxxxxxxxxxxxxxxxxxxrx8uo"
+# export TELEGRAM_BOT_TOKEN="6297291074:AAFzpuG7i3GNqUgx9Wj5JNxHF6WF_TCufhk"
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 if not BOT_TOKEN:
