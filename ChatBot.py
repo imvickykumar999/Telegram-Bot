@@ -1,14 +1,23 @@
-import os
-import requests
+import requests, os
 from flask import Flask, request, jsonify
+from groq import Groq
 
 app = Flask(__name__)
 
-# Bot token (Use an environment variable for security)
+# Environment Variables (Ensure these are set)
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+
+# https://console.groq.com/keys
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 if not BOT_TOKEN:
     raise ValueError("Bot token not found! Set the TELEGRAM_BOT_TOKEN environment variable.")
+
+if not GROQ_API_KEY:
+    raise ValueError("Groq API key not found! Set the GROQ_API_KEY environment variable.")
+
+# Initialize Groq client
+client = Groq(api_key=GROQ_API_KEY)
 
 BASE_URL = f"https://api.telegram.org/bot{BOT_TOKEN}"
 
@@ -27,16 +36,20 @@ def send_message(chat_id, text):
     payload = {"chat_id": chat_id, "text": text}
     requests.post(url, json=payload)
 
-# Function to generate a reply
+# Function to generate AI-based reply using Groq
 def generate_reply(message_text):
-    responses = {
-        "hi": "How can I assist you today?",
-        "hello": "Hello! How can I help you?",
-        "help": "I'm here to assist you. What do you need?",
-        "bye": "Goodbye! Have a great day! 😊",
-        "thanks": "You're welcome! Let me know if you need more help. 🙌",
-    }
-    return responses.get(message_text.lower(), "I'm not sure I understand. Can you rephrase?")
+    try:
+        completion = client.chat.completions.create(
+            model="llama-3.2-1b-preview",
+            messages=[{"role": "user", "content": message_text}],
+            temperature=1,
+            max_tokens=1024,
+            top_p=1,
+            stream=False,
+        )
+        return completion.choices[0].message.content.strip()
+    except Exception as e:
+        return "Sorry, I'm having trouble processing your request."
 
 # Webhook endpoint to receive messages
 @app.route("/webhook", methods=["POST"])
@@ -47,7 +60,7 @@ def webhook():
         chat_id = update["message"]["chat"]["id"]
         message_text = update["message"].get("text", "")
 
-        # Generate and send response
+        # Generate and send AI-based response
         reply_text = generate_reply(message_text)
         send_message(chat_id, reply_text)
 
@@ -60,4 +73,4 @@ def set_webhook_route():
     return jsonify(result)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000)
+    app.run(host="0.0.0.0", port=8080)

@@ -43,10 +43,11 @@ def generate_reply_from_ollama(message_text):
         )
 
         # Send user message to Ollama
-        output, error = process.communicate(input=message_text, timeout=1000)
-        print('output : ', output)
-
-        return output.strip() if output else "🤖 No response from AI."
+        output, error = process.communicate(input=message_text,
+            # timeout=1000
+        )
+        print('🤖 AI output : ', output)
+        return output.strip() if output else "https://blogforge.pythonanywhere.com/"
 
     except Exception as e:
         print(f"🔴 Exception in Ollama subprocess: {str(e)}")
