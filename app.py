@@ -74,7 +74,7 @@ def process_message(chat_id, message_text):
     send_message(chat_id, reply_text)
 
 # Route to manually set webhook (for testing)
-@app.route("/set_webhook", methods=["GET"])
+@app.route("/", methods=["GET"])
 def set_webhook_route():
     result = set_webhook()
     return jsonify(result)
