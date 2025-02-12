@@ -6,7 +6,7 @@ import threading
 
 app = Flask(__name__)
 
-# export TELEGRAM_BOT_TOKEN="6165663083:AAHigA2Z0IUJYeuvCoGpU5OMCwv84zrx8uo"
+# export TELEGRAM_BOT_TOKEN="616xxxxxx:xxxxxxxxxxxxxxxxxxxxxxxxxx4zrx8uo"
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 if not BOT_TOKEN:
@@ -34,8 +34,8 @@ def generate_reply_from_ollama(message_text):
     try:
         # Run Ollama as a subprocess
         process = subprocess.Popen(
-            ["ollama", "run", "blogforge"],
-            # ["ollama", "run", "llama3.2:1b"],
+            # ["ollama", "run", "blogforge"],
+            ["ollama", "run", "llama3.2:1b"],
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
