@@ -1,0 +1,46 @@
+{
+	"info": {
+		"_postman_id": "15e4b105-5215-4bbd-b494-646af27a521e",
+		"name": "Groq",
+		"description": "[https://github.com/imvickykumar999/Telegram-Bot/blob/main/GroqBot.py](https://github.com/imvickykumar999/Telegram-Bot/blob/main/GroqBot.py)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21359648"
+	},
+	"item": [
+		{
+			"name": "GroqTelegram",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"message\": {\n    \"chat\": {\n      \"id\": 5721393154 // telegram chat id, whom to send this message\n    },\n    \"text\": \"Who are you?\"\n  }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://telegramchatbot.pythonanywhere.com/webhook",
+					"protocol": "https",
+					"host": [
+						"telegramchatbot",
+						"pythonanywhere",
+						"com"
+					],
+					"path": [
+						"webhook"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
