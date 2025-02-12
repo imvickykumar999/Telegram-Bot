@@ -2,10 +2,11 @@ import os
 import requests
 from flask import Flask, request, jsonify
 import subprocess
+import threading
 
 app = Flask(__name__)
 
-# export TELEGRAM_BOT_TOKEN="6165663083:AAHigA2Z0IUJYeuvCoGpU5OMCwv84zrx8uo"
+# export TELEGRAM_BOT_TOKEN="6165xxxx:xxxxxxxxxxxxxxxxxxxxxxxxxxrx8uo"
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 if not BOT_TOKEN:
@@ -45,33 +46,31 @@ def generate_reply_from_ollama(message_text):
         output, error = process.communicate(input=message_text, timeout=1000)
         print('output : ', output)
 
-        # if error:
-        #     print("🔴 Ollama Error:", error)
-
         return output.strip() if output else "🤖 No response from AI."
 
     except Exception as e:
         print(f"🔴 Exception in Ollama subprocess: {str(e)}")
         return f"⚠️ Error communicating with Ollama: {str(e)}"
 
-# Webhook endpoint to receive messages
 @app.route("/webhook", methods=["POST"])
 def webhook():
     update = request.get_json()
 
+    # Send a quick response to Telegram before processing
+    response = jsonify({"status": "ok"})
+    
     if "message" in update:
         chat_id = update["message"]["chat"]["id"]
         message_text = update["message"].get("text", "")
-        print('📩 Received Message:', message_text)
 
-        # Generate response using Ollama
-        reply_text = generate_reply_from_ollama(message_text)
-        print('🤖 AI Reply:', reply_text)
+        # Process the message in the background
+        threading.Thread(target=process_message, args=(chat_id, message_text)).start()
 
-        # Send the response
-        send_message(chat_id, reply_text)
+    return response, 200
 
-    return jsonify({"status": "ok", "message" : reply_text}), 200
+def process_message(chat_id, message_text):
+    reply_text = generate_reply_from_ollama(message_text)
+    send_message(chat_id, reply_text)
 
 # Route to manually set webhook (for testing)
 @app.route("/set_webhook", methods=["GET"])
