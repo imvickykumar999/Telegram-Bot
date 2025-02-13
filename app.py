@@ -5,7 +5,7 @@ import subprocess
 import threading
 
 app = Flask(__name__)
-# export TELEGRAM_BOT_TOKEN="6165663083:AAHigA2Z0IUJYeuvCoGpU5OMCwv84zrx8uo"
+# set TELEGRAM_BOT_TOKEN=6165xxxx:xxxxxxxxxxxxxxxxxxxxxxzrx8uo
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 if not BOT_TOKEN:
