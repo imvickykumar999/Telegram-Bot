@@ -1,8 +1,10 @@
 
 # https://www.pythonanywhere.com/user/imvickykumar999/tasks_tab/
 import requests
+import os
 
-bot_token = '6297291074:AAFzpuG7i3GNqUgx9Wj5JNxHF6WF_TCufhk'
+bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
+
 gets = f'https://api.telegram.org/bot{bot_token}/getUpdates'
 req = requests.get(gets) 
 
@@ -11,9 +13,9 @@ lst = list(show.values())[1]
 
 bot_message = '''
 Good morning, 
-Here is today's news.
+Read our blogs.
 
-https://inshorts.com/en/read
+https://blogforge.pythonanywhere.com
 '''
 
 for i in lst:

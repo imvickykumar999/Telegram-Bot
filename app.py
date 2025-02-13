@@ -5,8 +5,6 @@ import subprocess
 import threading
 
 app = Flask(__name__)
-
-# export TELEGRAM_BOT_TOKEN="616xxxxxx:xxxxxxxxxxxxxxxxxxxxxxxxxx4zrx8uo"
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 if not BOT_TOKEN:
@@ -15,7 +13,7 @@ if not BOT_TOKEN:
 BASE_URL = f"https://api.telegram.org/bot{BOT_TOKEN}"
 
 # Webhook URL (Replace with your actual HTTPS URL)
-WEBHOOK_URL = "https://animated-space-carnival-4wpx7rpqx7pcx-8080.app.github.dev/webhook"
+WEBHOOK_URL = "https://monkey-related-kangaroo.ngrok-free.app/webhook"
 
 # Function to set webhook
 def set_webhook():
@@ -79,6 +77,10 @@ def set_webhook_route():
     result = set_webhook()
     return jsonify(result)
 
-# https://animated-space-carnival-4wpx7rpqx7pcx-8080.app.github.dev/set_webhook
+# https://monkey-related-kangaroo.ngrok-free.app
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080)
+    app.run(
+        host="0.0.0.0", 
+        port=8000, 
+        debug=True
+    )
