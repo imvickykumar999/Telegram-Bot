@@ -1,5 +1,14 @@
 ># `Telegram-Bot`
 >
+>## Quick Start
+>
+>      ngrok http --url=monkey-related-kangaroo.ngrok-free.app 8000
+>      export TELEGRAM_BOT_TOKEN="6165xxxxx:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxrx8uo"
+>      ollama serve
+>      python app.py
+>
+>## Read and Write
+>
 >     Read message : 
 >         (chat_id is in response of this request, it contains all 
 >         messages sent by anyone till now, on this bot)
@@ -12,8 +21,8 @@
 >         
 >             https://api.telegram.org/bot{bot_token}/sendMessage?chat_id={bot_chatID}&parse_mode=Markdown&text={bot_message}
 >
->## `Custom Model integrated with Telegram Webhook`
->### ollama run [blogforge](https://blogforge.pythonanywhere.com/blogs/)
+>## Custom Model integrated with Telegram Webhook
+>### `ollama run` [`blogforge`](https://blogforge.pythonanywhere.com/blogs/)
 >
 >![image](https://github.com/user-attachments/assets/593944c8-9173-4c5a-8900-8d7cd2cc1519)
 >
