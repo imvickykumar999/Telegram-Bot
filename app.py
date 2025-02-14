@@ -4,8 +4,10 @@ from flask import Flask, request, jsonify
 import subprocess
 import threading
 
-app = Flask(__name__)
 # set TELEGRAM_BOT_TOKEN=6165xxxx:xxxxxxxxxxxxxxxxxxxxxxzrx8uo
+# loclx tunnel http --to localhost:8000
+
+app = Flask(__name__)
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 if not BOT_TOKEN:
@@ -14,7 +16,8 @@ if not BOT_TOKEN:
 BASE_URL = f"https://api.telegram.org/bot{BOT_TOKEN}"
 
 # Webhook URL (Replace with your actual HTTPS URL)
-WEBHOOK_URL = "https://monkey-related-kangaroo.ngrok-free.app/webhook"
+# WEBHOOK_URL = "https://monkey-related-kangaroo.ngrok-free.app/webhook"
+WEBHOOK_URL = "https://lzjdpqykrs.loclx.io/webhook"
 
 # Function to set webhook
 def set_webhook():
