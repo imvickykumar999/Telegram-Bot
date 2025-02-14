@@ -4,20 +4,23 @@ from flask import Flask, request, jsonify
 import subprocess
 import threading
 
-# set TELEGRAM_BOT_TOKEN=6165xxxx:xxxxxxxxxxxxxxxxxxxxxxzrx8uo
-# loclx tunnel http --to localhost:8000
-
 app = Flask(__name__)
+
+# set TELEGRAM_BOT_TOKEN=6165xxxx:xxxxxxxxxxxxxxxxxxxxxxzrx8uo
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 if not BOT_TOKEN:
-    raise ValueError("Bot token not found! Set the TELEGRAM_BOT_TOKEN environment variable.")
+    raise ValueError(
+        "Bot token not found! Set the TELEGRAM_BOT_TOKEN environment variable."
+    )
 
 BASE_URL = f"https://api.telegram.org/bot{BOT_TOKEN}"
 
-# Webhook URL (Replace with your actual HTTPS URL)
+# ngrok http --url=monkey-related-kangaroo.ngrok-free.app 8000
 # WEBHOOK_URL = "https://monkey-related-kangaroo.ngrok-free.app/webhook"
-WEBHOOK_URL = "https://lzjdpqykrs.loclx.io/webhook"
+
+# loclx tunnel http --to localhost:8000
+WEBHOOK_URL = "https://ezlu9ulsnf.loclx.io/webhook"
 
 # Function to set webhook
 def set_webhook():
@@ -49,7 +52,8 @@ def generate_reply_from_ollama(message_text):
             # timeout=1000
         )
         print('🤖 AI output : ', output)
-        return output.strip() if output else "https://blogforge.pythonanywhere.com/"
+        return output.strip() if output \
+            else "https://blogforge.pythonanywhere.com/"
 
     except Exception as e:
         print(f"🔴 Exception in Ollama subprocess: {str(e)}")
@@ -67,7 +71,10 @@ def webhook():
         message_text = update["message"].get("text", "")
 
         # Process the message in the background
-        threading.Thread(target=process_message, args=(chat_id, message_text)).start()
+        threading.Thread(
+            target=process_message, 
+            args=(chat_id, message_text)
+        ).start()
 
     return response, 200
 
@@ -81,7 +88,6 @@ def set_webhook_route():
     result = set_webhook()
     return jsonify(result)
 
-# https://monkey-related-kangaroo.ngrok-free.app
 if __name__ == "__main__":
     app.run(
         host="0.0.0.0", 
